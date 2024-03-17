@@ -1,7 +1,9 @@
 package com.estsoft.blogjpa.domain;
 
 import com.estsoft.blogjpa.dto.ArticleResponse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,10 +11,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @Entity
+@AllArgsConstructor
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +36,10 @@ public class Article {
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "article")
+    @JsonIgnoreProperties({"article"})
+    private List<Comment> comments;
 
     @Builder
     public Article(String title, String content) {
