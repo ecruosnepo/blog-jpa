@@ -60,5 +60,6 @@ class UserInfoControllerTest {
 
     @Test
     void logout() {
+        //충돌 발생
     }
 }
