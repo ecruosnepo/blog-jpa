@@ -60,6 +60,6 @@ class UserInfoControllerTest {
 
     @Test
     void logout() {
-        //충돌 발생
+        //테스트 코드 수정 커밋 연습
     }
 }
