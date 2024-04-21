@@ -7,10 +7,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 class BlogJpaApplicationTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
     @Test
     void contextLoads() {
     }

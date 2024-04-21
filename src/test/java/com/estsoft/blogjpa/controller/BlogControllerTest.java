@@ -4,6 +4,7 @@ import com.estsoft.blogjpa.domain.Article;
 import com.estsoft.blogjpa.repository.BlogRepository;
 import com.estsoft.blogjpa.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,17 +77,17 @@ class BlogControllerTest {
     @Test
     public void deleteOneArticle() throws Exception{
         //given
-        Article article = new Article("제목","내용");
+        Article article = blogRepository.save(new Article("title", "content"));
 //        Article articleSave = blogRepository.save(article);
 //        Long id = articleSave.getId();
         Long id = article.getId();
 
         //when
-        ResultActions resultActions = mockMvc.perform(delete("/api/articles/{id}"));
+        ResultActions resultActions = mockMvc.perform(delete("/api/articles/{id}",id));
 
         //then
-        resultActions.andExpect(status().is4xxClientError());
-        Article deleteArticle = blogRepository.findById(id).orElse(null);
-        Assertions.assertNull(deleteArticle);
+        resultActions.andExpect(status().isOk());
+        Optional<Article> deleteArticle = blogRepository.findById(id);
+        assertFalse(deleteArticle.isPresent());
     }
 }
