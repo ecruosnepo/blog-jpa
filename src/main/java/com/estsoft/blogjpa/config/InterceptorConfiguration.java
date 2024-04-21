@@ -1,5 +1,6 @@
-package com.estsoft.blogjpa.Interceptor;
+package com.estsoft.blogjpa.config;
 
+import com.estsoft.blogjpa.interceptor.MethodPrintInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
